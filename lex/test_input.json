@@ -1,0 +1,16 @@
+{
+	"messageVersion": "1.0",
+	"invocationSource": "lex",
+	"userId": "sarahconner",
+	"sessionAttributes": {},
+	"bot": {
+		"name": "tellMeAboutAI",
+		"alias": "$LATEST",
+		"version": "$LATEST"
+	},
+	"outputDialogMode": "Text",
+	"currentIntent": {
+	"name": "tellMeAboutAI",
+	"confirmationStatus": "None"
+	}
+}
