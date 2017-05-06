@@ -26,6 +26,10 @@ def close(fulfillment_state, message):
 
     return response
 
+"""
+Read file from S3 bucket and return a random lines
+"""
+
 
 def get_quote():
 
@@ -35,6 +39,11 @@ def get_quote():
     lines = open(download_file).read().splitlines()
     q = random.choice(lines)
     return q
+
+
+"""
+Handle the intent
+"""
 
 
 def answer_question(intent_request):
@@ -47,9 +56,6 @@ def answer_question(intent_request):
             'content': q
         }
     )
-
-
-""" --- Intents --- """
 
 
 def dispatch(intent_request):
