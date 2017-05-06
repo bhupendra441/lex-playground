@@ -5,49 +5,49 @@ In this example, we will be creating a simple Lex bot that uses a Lambda functio
 
 ## Prepare IAM
 
- - Login to the AWS Console and go to the IAM console
+ - Login to the AWS Console and go to the IAM console.
 
- - Create a role called 'lambda-s3-lex'
+ - Create a role called 'lambda-s3-lex'.
 
- - In the policy section, attach 'AmazonS3ReadOnlyAccess' & 'AmazonLexRunBotsOnly' policies. For this example, we only these two roles. 
+ - In the policy section, attach 'AmazonS3ReadOnlyAccess' & 'AmazonLexRunBotsOnly' policies. For this example, we only need these two roles. 
 
 ## Prepare S3
 
- - Create a bucket that will store the quotes file. You can name this bucket anything
+ - Create a bucket that will store the quotes file. You can give any name to this bucket.
 
- - Inside this bucket, there needs to be a file named 'quotes.txt'. You can use the s3/quotes.txt file provided in this repo.
+ - Inside this bucket, there needs to be a file named 'quotes.txt' which contains data. You can use the [quotes.txt](./s3/quotes.txt) file provided in this repo.
 
- - In terms of S3 permissions, we are allowing any authenticated user to read objects in this bucket.
-
- - All other S3 settings can be left as default
+ - In terms of S3 permissions, we are allowing any authenticated user to read objects in this bucket. All other S3 settings can be left as default.
 
 ## Update Python code
 
- - The code lambda\tell_me_about_ai.py has one variables that needs to be updated; S3_BUCKET. Update this with your bucket name
+ - The code [tell_me_about_ai.py](lambda\tell_me_about_ai.py) has one variable that needs to be updated with the S3 bucket in your account.
+ 
+ - Edit the variable named _S3_BUCKET_ with your bucket name.
 
 ## Create Lex Bot and Intent
 
- - In the Lex console, choose custom bot
+ - In the Lex console, choose 'Custom Bot'.
 
- - Use 'tellMeAboutAI' for the name
+ - Use 'tellMeAboutAI' for the name.
 
- - Pick any Output Voice
+ - Pick any Output Voice.
 
- - Set session timeout to 2 minutes
+ - Set session timeout to 2 minutes.
 
- - Use 'No' for the Child Directed question
+ - Use 'No' for the 'Child Directed' question.
 
- - Click create. This create the bot structure for our AI bot
+ - Click create. This create the bot structure for our bot.
 
- - Now, create an Intent with the name 'answerwithquote'
+ - Now, create an Intent with the name 'answerwithquote'.
 
  - Fill out the fields as shown in the screenshot. This example is fairly simple but you can customise it if you want to experiment.
  
 ![image](images/intent.png)
 
- - Now, click the "Build" button to build this. This usually takes about 5 to 10 seconds
+ - Now, click the "Build" button to build this. This usually takes about 5 to 10 seconds.
 
- - Test the bot. This ensures our basic bot is working. We will come back to this after we finish configuring Lambda.
+ - Test the bot in the web interface. This ensures our basic bot is working. We will come back to this after we finish configuring Lambda.
  
  ![image](images/testbot1.png)
 
@@ -55,19 +55,19 @@ In this example, we will be creating a simple Lex bot that uses a Lambda functio
 
 ## Create Lambda Function
 
- - Now, go to the Lambda console, choose New Function, then Blank Function
+ - Now, go to the Lambda console, choose 'New Function', then 'Blank Function'.
 
- - Select Python 2.7 as your runtime
+ - Select Python 2.7 as your runtime.
 
- - You can package and upload the Lambda code but for simplicity, just copy and paste the contents of tell_me_about_ai.py
+ - You can package and upload the Lambda code but for simplicity, just copy and paste the contents of [tell_me_about_ai.py](lambda\tell_me_about_ai.py) into the Lambda code text area.
 
- - In the function handler and role section, select the 'lambda-s3-lex' role created above.
+ - In the 'Function handler and role section', select the 'lambda-s3-lex' role created above.
 
  - Remaining options can be left as default
 
- - Choose create function
+ - Choose create function.
 
- - Once created, choose actions and 'configure test event'. Use the input below to test this function. This input provides the bot name and the intent name which are used in the Lambda code. If all else is fine, you should see "fulfillmentState": "Fulfilled" in the execution result
+ - Once created, choose actions and 'configure test event'. Use the input below to test this function. This input provides the bot name and the intent name which are used in the Lambda code. If all else is fine, you should see "fulfillmentState": "Fulfilled" in the execution result.
  
 ```
 {
@@ -90,15 +90,15 @@ In this example, we will be creating a simple Lex bot that uses a Lambda functio
 
 ## Configure Lex Bot with Lambda Function
 
- - Go back to the Lex console and choose the 'tellMeAboutAI' bot
+ - Go back to the Lex console and choose the 'tellMeAboutAI' bot.
  
- - Click on 'answerwithquote' intent and chose Latest in the version dropdown. Note, you can only edit the $LATEST version
+ - Click on 'answerwithquote' intent and chose Latest in the version dropdown. Note, you can only edit the $LATEST version.
  
  - Choose 'AWS Lambda Function' and select the 'tell_me_about_ai' function.
  
- - Save the intent
+ - Save the intent.
  
- - Choose build again
+ - Choose build again.
  
  - And run our test again. This time the output should be a quote that is returned by the Lambda function.
  
