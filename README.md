@@ -21,7 +21,7 @@ In this example, we will be creating a simple Lex bot that uses a Lambda functio
 
 ## Update Python code
 
- - The code [tell_me_about_ai.py](lambda\tell_me_about_ai.py) has one variable that needs to be updated with the S3 bucket in your account.
+ - The code [tell_me_about_ai.py](./lambda/tell_me_about_ai.py) has one variable that needs to be updated with the S3 bucket in your account.
  
  - Edit the variable named _S3_BUCKET_ with your bucket name.
 
@@ -59,7 +59,7 @@ In this example, we will be creating a simple Lex bot that uses a Lambda functio
 
  - Select Python 2.7 as your runtime.
 
- - You can package and upload the Lambda code but for simplicity, just copy and paste the contents of [tell_me_about_ai.py](lambda/tell_me_about_ai.py) into the Lambda code text area.
+ - You can package and upload the Lambda code but for simplicity, just copy and paste the contents of [tell_me_about_ai.py](./lambda/tell_me_about_ai.py) into the Lambda code text area.
 
  - In the 'Function handler and role section', select the 'lambda-s3-lex' role created above.
 
