@@ -10,7 +10,7 @@ Lambda function that reads a file from S3 and prints out a random quote from the
 """
 Global variables
 """
-S3_BUCKET = 'ai8j4f8jfjf8jfjfjfjfjfa'
+S3_BUCKET = 'storelexquotes'
 S3_OBJECT = 'quotes.txt'
 
 
